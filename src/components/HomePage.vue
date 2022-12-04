@@ -3,6 +3,7 @@
     <InputAddUrl/>
     <Gallery/>
   </div>
+  <notifications />
 </template>
 
 <script setup>
