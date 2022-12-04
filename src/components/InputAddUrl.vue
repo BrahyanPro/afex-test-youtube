@@ -1,8 +1,8 @@
 <template>
   <h2>Añadir un nuevo video</h2>
   <form class="container-input">
-    <input type="text" class="input-add">
-    <button class="add-url" type="button">Añadir</button>
+    <input type="text" class="input-add" v-model="currentUrl" placeholder="Añadir">
+    <button class="add-url" type="button" v-on:click="validateURl">Añadir</button>
   </form>
 
 
@@ -10,7 +10,17 @@
 
 <script setup>
 
-// const urlAgregar = ref('')
+let currentUrl = ''
+const getVideoId = () => currentUrl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
+
+const validateURl = () => {
+  const idVideo = getVideoId()
+  if (idVideo) {
+    console.log(idVideo)
+  } else {
+    console.log('No es una url válida')
+  }
+}
 
 </script>
 
