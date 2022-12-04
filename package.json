@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "axios": "^1.2.0",
+    "firebase": "^9.14.0",
     "vue": "^3.2.41",
+    "vue-firestore": "^0.3.30",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
