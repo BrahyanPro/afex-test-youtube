@@ -1,4 +1,5 @@
 <template>
+  <h2>Añadir un nuevo video</h2>
   <form class="container-input">
     <input type="text" class="input-add">
     <button class="add-url" type="button">Añadir</button>
@@ -16,7 +17,7 @@
 
 <style scoped>
 .container-input {
-  max-width: 60%;
+  width: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
