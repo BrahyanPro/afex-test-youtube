@@ -9,27 +9,12 @@
 </template>
 
 <script setup>
+import DataServices from '../utils/services.js'
 
 let currentUrl = ''
 const getVideoId = () => currentUrl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
 
-const validateID = async () => {
-  const result = await this.$firestore().collection('afex-youtube')
-    .where('id', '==', getVideoId())
-    .get()
-  return !result.empty
-}
-
-const validateURl = () => {
-  const idVideo = getVideoId()
-  const valid = validateID()
-  console.log(valid)
-  if (idVideo) {
-    console.log(idVideo)
-  } else {
-    console.log('No es una url válida')
-  }
-}
+const validateURl = () => DataServices.validateUnique(getVideoId())
 
 </script>
 
@@ -87,5 +72,4 @@ const validateURl = () => {
 .add-url:active {
    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
  }
-
 </style>
