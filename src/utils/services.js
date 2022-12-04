@@ -1,6 +1,8 @@
 import database from "./firebase";
 import axios from 'axios';
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import Alert from './alert.js'
+import alert from './alert.js'
 
 const collectionReference = collection(database, "videos");
 
@@ -13,21 +15,13 @@ class DataService {
   }
 
   async validateUnique(id) {
-    const querySnapshot = await getDocs(query(collectionReference, where('id', '==', id)));
-    if (querySnapshot.size === 0) {
-      await this.getYoutubeData(id);
-      return true;
-    } else {
-      console.log(querySnapshot.size);
-      console.log('Esto ya existe');
-    }
+    const queryResult = await getDocs(query(collectionReference, where('id', '==', id)));
+    queryResult.size === 0 ? await this.getYoutubeData(id) : Alert.error('Este video ya se encuentra en tu album de videos');
   }
   async getYoutubeData(id){
     const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=AIzaSyCPNimo2V3E8P0peKaoDMHWKIWsZYPsBow&part=snippet,contentDetails`;
-    axios.get(url).then((response) => {
-      const videoData = response.data.items[0];
-      this.create(videoData);
-    })
+    axios.get(url).then((response) => this.create(response.data.items[0]))
+                  .catch((error) => alert.error(error))
   }
   async create(videoData) {
     try {
@@ -39,10 +33,10 @@ class DataService {
         description: videoData?.snippet.description,
       }
       await addDoc(collectionReference, data);
+      Alert.success('Video agregado correctamente');
     } catch (e) {
-      console.error("Error adding document: ", e);
+      Alert.error('Error al agregar el video : ', e);
     }
-    // return db.add(video);
   }
 
   delete(id) {
