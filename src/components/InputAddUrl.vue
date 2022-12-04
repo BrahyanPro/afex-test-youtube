@@ -13,8 +13,17 @@
 let currentUrl = ''
 const getVideoId = () => currentUrl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
 
+const validateID = async () => {
+  const result = await this.$firestore().collection('afex-youtube')
+    .where('id', '==', getVideoId())
+    .get()
+  return !result.empty
+}
+
 const validateURl = () => {
   const idVideo = getVideoId()
+  const valid = validateID()
+  console.log(valid)
   if (idVideo) {
     console.log(idVideo)
   } else {
