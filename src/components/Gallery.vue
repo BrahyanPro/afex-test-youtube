@@ -17,7 +17,25 @@
 
 
 import CardCreative from './CardCreative.vue'
+import DataServices from '../utils/services.js'
+
+import {onMounted} from 'vue'
+
+let galleryData = []
+
+const loadData = async () => {
+  galleryData = await DataServices.getAll(galleryData)
+  console.log(galleryData)
+}
+
+onMounted(() => {
+  console.log('mounted')
+  loadData()
+})
+
 </script>
+
+
 
 <style scoped>
 

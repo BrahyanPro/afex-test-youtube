@@ -8,14 +8,26 @@ const collectionReference = collection(database, "videos");
 
 class DataService {
   async getAll() {
-    const querySnapshot = await getDocs(collectionReference);
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
+    const documents = [];
+
+    // Query the collection
+    const snapshot = await getDocs(collectionReference);
+
+    // Loop through the documents in the query snapshot
+    snapshot.forEach(doc => {
+      // Extract the data from each document
+      const data = doc.data();
+
+      // Add the data to the array
+      documents.push(data);
     });
+
+    return documents;
   }
 
   async validateUnique(id) {
     const queryResult = await getDocs(query(collectionReference, where('id', '==', id)));
+    Alert.success('Validando video');
     queryResult.size === 0 ? await this.getYoutubeData(id) : Alert.error('Este video ya se encuentra en tu album de videos');
   }
   async getYoutubeData(id){
