@@ -6,9 +6,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faUserSecret, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faTrashAlt, faClock, faMoneyBillTrendUp } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserSecret, faTrashAlt)
+library.add(faUserSecret, faTrashAlt, faClock, faMoneyBillTrendUp)
 
 
 
