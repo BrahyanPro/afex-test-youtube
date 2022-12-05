@@ -10,11 +10,12 @@
 
 <script setup>
 import DataServices from '../utils/services.js'
+import {ref} from 'vue'
 
-let currentUrl = ''
-const getVideoId = () => currentUrl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
-
-const validateURl = () => DataServices.validateUnique(getVideoId())
+let currentUrl = ref('')
+const getVideoId = () => currentUrl.value.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
+const emit = defineEmits(['renderGallery'])
+const validateURl = () => DataServices.validateUnique(getVideoId()).then(() => {emit('renderGallery'); currentUrl.value = ''})
 </script>
 
 
