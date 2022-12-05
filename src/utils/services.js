@@ -1,6 +1,6 @@
 import database from "./firebase";
 import axios from 'axios';
-import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore";
 import Alert from './alert.js'
 import alert from './alert.js'
 
@@ -43,7 +43,7 @@ class DataService {
         thumbnail: videoData?.snippet.thumbnails.medium.url,
         description: videoData?.snippet.description,
       }
-      await addDoc(collectionReference, data);
+      await setDoc(doc(database, "videos", data.id), data);
       Alert.success('Video agregado correctamente');
     } catch (e) {
       Alert.error('Error al agregar el video : ', e);
@@ -54,6 +54,7 @@ class DataService {
     try {
       await deleteDoc(doc(database, "videos", id));
       Alert.success('Video eliminado correctamente')
+      console.log(id)
     } catch (e) {
       Alert.error('Error al eliminar el video : ', e);
     }
