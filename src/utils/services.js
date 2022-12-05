@@ -1,6 +1,6 @@
 import database from "./firebase";
 import axios from 'axios';
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 import Alert from './alert.js'
 import alert from './alert.js'
 
@@ -27,7 +27,6 @@ class DataService {
 
   async validateUnique(id) {
     const queryResult = await getDocs(query(collectionReference, where('id', '==', id)));
-    Alert.success('Validando video');
     queryResult.size === 0 ? await this.getYoutubeData(id) : Alert.error('Este video ya se encuentra en tu album de videos');
   }
   async getYoutubeData(id){
@@ -51,8 +50,13 @@ class DataService {
     }
   }
 
-  delete(id) {
-    // return db.doc(id).delete();
+  async delete(id) {
+    try {
+      await deleteDoc(doc(database, "videos", id));
+      Alert.success('Video eliminado correctamente')
+    } catch (e) {
+      Alert.error('Error al eliminar el video : ', e);
+    }
   }
 }
 
