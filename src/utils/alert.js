@@ -35,13 +35,6 @@ class Alerts {
       evaluateOption(result, action)
     })
   }
-  warning(message) {
-    notify({
-      title: "Warning",
-      text: message,
-      type: 'warning'
-    });
-  }
 
   confirm(message, action, title, acceptText, cancelText) {
     Swal.fire({
