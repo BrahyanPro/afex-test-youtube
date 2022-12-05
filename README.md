@@ -1,7 +1,18 @@
-# Vue 3 + Vite
+# Test Apex Youtube API
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Esta prueba se basa en el ejemplo de [Youtube Data API v3 Quickstart for js](https://developers.google.com/youtube/v3/quickstart/js)
 
-## Recommended IDE Setup
+## Screenshots
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+![Layout](public/layout.png)
+![modal](public/Modal.png)
+![modal delete](public/modaldelete.png)
+
+## Puntos a mejorar
+
+- [ ] Agregar etiquetas de los videos y poder filtrar por ellas
+- [ ] Agregar un buscador de videos
+- [ ] Mostrar las vistas del video
+- [ ] Ordenarlos segun varios parametros que se decidan necesarios ej : vistas, fecha de subida, etc
+- [ ] Libertad creativa, si no sera un figma hermoso mejor dejar la libertad de hacer lo que uno quiera, o pasar el figma y a la vez dejarlo claro en el pdf
