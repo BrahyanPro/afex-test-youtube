@@ -10,12 +10,12 @@
 
 <script setup>
 import DataServices from '../utils/services.js'
+import Alert from '../utils/alert.js'
 
 let currentUrl = ''
 const getVideoId = () => currentUrl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
 
 const validateURl = () => DataServices.validateUnique(getVideoId())
-
 </script>
 
 
