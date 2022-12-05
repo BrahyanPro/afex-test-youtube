@@ -57,4 +57,12 @@ onMounted(() => {
   grid-gap: 3rem;
   margin-top: 2rem;
 }
+
+@media (max-width: 768px) {
+  .gallery__layout {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+  }
+}
+
 </style>

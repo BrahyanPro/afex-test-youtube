@@ -10,6 +10,7 @@
            :bordered="false"
            style="width: 900px"
            role="dialog"
+           class="custom-card"
            aria-modal="true"
            size="huge">
       <template #header-extra>
@@ -60,6 +61,13 @@ const renderGalleries = () => renderGalleryKey.value++
 .modal__content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .custom-card{
+    max-width: 90% !important;
+  }
 }
 .description{
   font-size: 1rem;

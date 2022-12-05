@@ -28,6 +28,12 @@ const validateURl = () => DataServices.validateUnique(getVideoId()).then(() => {
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  .container-input {
+    width: 80%;
+  }
+}
+
 .input-add {
   width: 100%;
   border: 3px solid #00B4CC;
