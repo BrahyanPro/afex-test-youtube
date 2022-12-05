@@ -1,7 +1,7 @@
 <template>
   <div class="gallery">
     <div class="gallery__layout" >
-      <card-creative v-for="card in galleryData" :key="card.id"  :title="card.title" :image="card.thumbnail" :time="card.time" :id="card.id"/>
+      <card-creative @renderFather="emit('renderGallery')" @showModal="showModalInfo" v-for="card in galleryData" :key="card.id"  :title="card.title" :image="card.thumbnail" :time="card.time" :id="card.id"/>
     </div>
   </div>
 
@@ -13,6 +13,13 @@
 import CardCreative from './CardCreative.vue'
 import DataServices from '../utils/services.js'
 import {onMounted, ref, watchEffect} from 'vue'
+
+const emit = defineEmits(['handleShowModal'])
+
+const showModalInfo = (id) => {
+  let obj = galleryData.value.find((item) => item.id === id)
+  emit('handleShowModal', obj)
+}
 
 let galleryData= ref(null)
 
