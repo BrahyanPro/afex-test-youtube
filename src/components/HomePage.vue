@@ -1,13 +1,15 @@
 <template>
   <div class="home">
     <InputAddUrl/>
-    <Gallery/>
+    <Gallery />
   </div>
 </template>
 
 <script setup>
 import InputAddUrl from './InputAddUrl.vue'
 import Gallery from './Gallery.vue'
+import { ref } from 'vue'
+
 </script>
 
 <style scoped>
@@ -19,5 +21,4 @@ import Gallery from './Gallery.vue'
   justify-content: center;
   align-items: center;
 }
-
 </style>
