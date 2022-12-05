@@ -1,10 +1,17 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import Notifications from '@kyvg/vue3-notification'
+import 'sweetalert2/dist/sweetalert2.min.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+/* import specific icons */
+import { faUserSecret, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUserSecret, faTrashAlt)
 
 
 
 const app = createApp(App)
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')
-app.use(Notifications)
