@@ -1,7 +1,7 @@
 <template>
-  <div class="card--recipe">
-    <img class="card--recipe__img" :src="image" :alt="title"/>
-    <div class="card--recipe__play">
+  <div class="card--recipe" >
+    <img class="card--recipe__img" :src="image" :alt="title" v-on:click="showModalInfo(id)"/>
+    <div class="card--recipe__play" v-on:click="showModalInfo(id)">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/Play.svg" alt="boton play"/>
     </div>
 
@@ -31,6 +31,13 @@ import alert from '../utils/alert.js'
 import DataServices from '../utils/services.js'
 import {parseISO8601Duration} from '../utils'
 
+const emit = defineEmits(['showModal', 'renderFather'])
+
+const showModalInfo = (id) => {
+  emit('showModal', id)
+}
+
+
 defineProps({
   title: {
     type: String,
@@ -53,7 +60,7 @@ defineProps({
 const handleDeleteCard = (id) => {
   console.log('delete')
   console.log(id)
-  alert.confirm('¿Estas seguro de eliminar este video?', () => deleteFirestore(id))
+  alert.confirm('¿Estas seguro de eliminar este video?', () => deleteFirestore(id).then(() => emit('renderFather')))
 }
 
 const deleteFirestore = async (id) => await DataServices.delete(id)
@@ -120,13 +127,13 @@ const deleteFirestore = async (id) => await DataServices.delete(id)
   width: 100%;
   z-index: 3;
 }
-.card--recipe__title {
-  color: white;
-  font-size: 0.9rem;
-  margin: 0;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
+/*.card--recipe__title {*/
+/*  color: white;*/
+/*  font-size: 0.9rem;*/
+/*  margin: 0;*/
+/*  font-weight: 900;*/
+/*  margin-bottom: 8px;*/
+/*}*/
 .card--recipe__labels {
   margin: 0;
   padding: 0;
