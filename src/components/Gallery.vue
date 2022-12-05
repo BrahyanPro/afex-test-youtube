@@ -1,14 +1,8 @@
 <template>
   <div class="gallery">
-    <div class="gallery__layout">
-    <card-creative/>
-    <card-creative/>
-    <card-creative/>
-    <card-creative/>
-      <card-creative/>
-      <card-creative/>
+    <div class="gallery__layout" >
+      <card-creative v-for="card in galleryData" :key="card.id"  :title="card.title" :image="card.thumbnail" :time="card.time" :id="card.id"/>
     </div>
-
   </div>
 
 </template>
@@ -18,18 +12,20 @@
 
 import CardCreative from './CardCreative.vue'
 import DataServices from '../utils/services.js'
+import {onMounted, ref, watchEffect} from 'vue'
 
-import {onMounted} from 'vue'
+let galleryData= ref(null)
 
-let galleryData = []
-
+watchEffect(
+  async () => {
+    galleryData.value = await DataServices.getAll()
+  }
+)
 const loadData = async () => {
-  galleryData = await DataServices.getAll(galleryData)
-  console.log(galleryData)
+  galleryData.value = await DataServices.getAll(galleryData)
 }
 
 onMounted(() => {
-  console.log('mounted')
   loadData()
 })
 
@@ -49,7 +45,7 @@ onMounted(() => {
 
 .gallery__layout {
   display: grid;
-  max-width: 1200px;
+  max-width: 1400px;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3rem;
   margin-top: 2rem;
