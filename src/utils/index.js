@@ -1,7 +1,6 @@
 function parseISO8601Duration(duration) {
   let regex = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
   let matches = duration.match(regex);
-  console.log(matches);
 
   let hours = parseInt(matches[1]) || 0;
   let minutes = parseInt(matches[2]) || 0;
