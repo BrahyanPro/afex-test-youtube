@@ -61,12 +61,14 @@ const renderGalleries = () => renderGalleryKey.value++
 .modal__content {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
+  }
 @media (max-width: 768px) {
   .custom-card{
     max-width: 90% !important;
+  }
+  .modal__content {
+    flex-wrap: wrap;
+    margin-top: 1rem;
   }
 }
 .description{
