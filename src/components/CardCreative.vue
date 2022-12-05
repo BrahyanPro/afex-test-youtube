@@ -1,21 +1,22 @@
 <template>
   <div class="card--recipe">
-    <img class="card--recipe__img" src="https://www.theseasonedmom.com/wp-content/uploads/2017/07/Creamy-Italian-Pasta-Salad-10.jpg" alt="miniatura"/>
+    <img class="card--recipe__img" :src="image" :alt="title"/>
     <div class="card--recipe__play">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/Play.svg" alt="boton play"/>
     </div>
 
     <div class="card--recipe__content">
-      <h3 class="card--recipe__title">Titulo de youtube Fachero</h3>
+<!--      <h3 class="card&#45;&#45;recipe__title">{{title}}</h3> Tenia planeado ponerle el titulo pero nose que clase de jefes son XD, el figma no lo tiene y pumba -->
       <ul class="card--recipe__labels">
-        <li class="card--recipe__label-category">
+        <li class="card--recipe__label-category" v-on:click="handleDeleteCard(id)">
+          <font-awesome-icon icon="fas fa-trash-alt" />
           Eliminar
         </li>
         <li class="card--recipe__label">
-          Tiempo
+          {{id}}
         </li>
         <li class="card--recipe__label">
-          1:20
+          {{time}}
         </li>
       </ul>
     </div>
@@ -23,13 +24,45 @@
 </template>
 
 <script setup>
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import alert from '../utils/alert.js'
+import DataServices from '../utils/services.js'
+
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  id: {
+    type: String,
+    required: true
+  }
+})
+
+const handleDeleteCard = (id) => {
+  console.log('delete')
+  console.log(id)
+  alert.confirm('¿Estas seguro de eliminar este video?', () => deleteFirestore(id))
+}
+
+const deleteFirestore = async (id) => await DataServices.delete(id)
+
+
 </script>
 
 <style scoped>
 .card--recipe {
   position: relative;
-  width: 300px;
-  height: 450px;
+  width: 320px;
+  height: 180px;
   border-radius: 12px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.04), 0 7px 18px 0 rgba(0, 0, 0, 0.05), 0 12px 24px 0 rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.25s ease;
@@ -44,24 +77,7 @@
   border-radius: 12px;
   object-fit: cover;
 }
-.card--recipe__video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  object-fit: cover;
-  z-index: 1;
-  overflow: hidden;
-}
-.card--recipe__video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.2s ease;
-  opacity: 0;
-}
+
 .card--recipe::before {
   position: absolute;
   bottom: 0;
@@ -84,8 +100,8 @@
   left: calc(50% - 23px);
   top: calc(42% - 25px);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background: white;
   z-index: 3;
 }
@@ -103,7 +119,7 @@
 }
 .card--recipe__title {
   color: white;
-  font-size: 27px;
+  font-size: 0.9rem;
   margin: 0;
   font-weight: 900;
   margin-bottom: 8px;
@@ -123,7 +139,10 @@
   color: white;
 }
 .card--recipe__label-category {
-  background: #2bb778;
+  background: #2B3044;
+}
+.card--recipe__label-category:hover {
+  background: #D23369;
 }
 .card--recipe.is--playing video {
   opacity: 1;
