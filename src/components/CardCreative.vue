@@ -12,11 +12,13 @@
           <font-awesome-icon icon="fas fa-trash-alt" />
           Eliminar
         </li>
-        <li class="card--recipe__label">
-          {{id}}
+        <li class="card--recipe__label afex">
+          <font-awesome-icon icon="fa-solid fa-money-bill-trend-up" />
+          Afex
         </li>
         <li class="card--recipe__label">
-          {{time}}
+          <font-awesome-icon icon="fa-solid fa-clock" />
+          {{parseISO8601Duration(time)}}
         </li>
       </ul>
     </div>
@@ -27,6 +29,7 @@
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import alert from '../utils/alert.js'
 import DataServices from '../utils/services.js'
+import {parseISO8601Duration} from '../utils'
 
 defineProps({
   title: {
@@ -129,6 +132,10 @@ const deleteFirestore = async (id) => await DataServices.delete(id)
   padding: 0;
   list-style: none;
 }
+.card--recipe__labels .afex {
+  background-color: #00462c;
+}
+
 .card--recipe__label-category, .card--recipe__label {
   border-radius: 3px;
   display: inline-block;
